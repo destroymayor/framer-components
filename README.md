@@ -1,13 +1,13 @@
-# Next.js starter
+# Framer-Components
 
-### Running locally
+開發可重用的元件
 
-```
-$ yarn
-$ yarn prepare
-$ yarn dev
-```
+## Dependencies
 
-### Deploy
+- Tailwind CSS
+- framer-motion
+- clsx
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdestroymayor%2Fnextjs-tailwindcss-template)
+## Components
+
+- Toast
