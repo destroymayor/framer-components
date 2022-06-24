@@ -1,6 +1,6 @@
 # Framer-Components
 
-開發可重用的元件
+Develop reusable components
 
 ## Dependencies
 
@@ -10,4 +10,6 @@
 
 ## Components
 
+- Button
+- Spinner
 - Toast

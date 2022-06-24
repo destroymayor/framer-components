@@ -8,8 +8,8 @@ const ToastContext = createContext();
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 
-  const addToast = useCallback(({ title, description }) => {
-    const newToast = { id: generateUUidV4(), title, description };
+  const addToast = useCallback(({ title, description, severity = 'default' }) => {
+    const newToast = { id: generateUUidV4(), title, description, severity };
     setToasts((prevState) => [newToast, ...prevState]);
   }, []);
 
