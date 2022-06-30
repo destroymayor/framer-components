@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUpIcon, ChevronDownIcon } from '@/components/Icon';
 
-import { colorTypes } from './constants';
+import { colorType } from './constants';
 
 export default function Select(props) {
   const {
@@ -38,9 +38,7 @@ export default function Select(props) {
         className={clsx(
           'group flex min-w-[150px] items-center justify-between rounded-lg bg-white p-2 text-gray-600 shadow ring ring-zinc-200 transition duration-200 ease-in-out focus:outline-none',
           className,
-          disabled
-            ? 'cursor-not-allowed bg-zinc-300 text-zinc-400 ring-zinc-300'
-            : colorTypes[color]
+          disabled ? 'cursor-not-allowed bg-zinc-300 text-zinc-400 ring-zinc-300' : colorType[color]
         )}
         onClick={handleToggle}
       >
