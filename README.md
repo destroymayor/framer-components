@@ -11,5 +11,11 @@ Develop reusable components
 ## Components
 
 - Button
+- Checkbox
+- Select
+- Switch
 - Spinner
 - Toast
+- Tag
+- Tabs
+- Tooltip
