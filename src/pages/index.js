@@ -5,8 +5,28 @@ import Checkbox from '@/components/Checkout';
 import { useToast } from '@/components/Toast';
 import Select from '@/components/Select/Select';
 import Switch from '@/components/Switch';
+import Tabs from '@/components/Tabs';
 import Tag from '@/components/Tag';
 import Tooltip from '@/components/Tooltip';
+
+const tabsData = [
+  {
+    title: 'Saved sites',
+    value: 'sites',
+  },
+  {
+    title: 'Collections',
+    value: 'collections',
+  },
+  {
+    title: '48 Following',
+    value: 'following',
+  },
+  {
+    title: '32 Followers',
+    value: 'followers',
+  },
+];
 
 const Section = (props) => {
   const { title, children } = props;
@@ -94,6 +114,24 @@ export default function Home() {
           >
             Add Error Toast
           </Button>
+        </Section>
+
+        <Section title="Tabs">
+          <div className="flex flex-col items-start gap-2">
+            <span>Default</span>
+            <Tabs className="rounded-md border border-zinc-400">
+              {tabsData.map((tab) => (
+                <Tabs.Tab key={tab.value}>{tab.title}</Tabs.Tab>
+              ))}
+            </Tabs>
+
+            <span>Vertical Tabs</span>
+            <Tabs direction="vertical" className="rounded-md border border-zinc-400">
+              {tabsData.map((tab) => (
+                <Tabs.Tab key={tab.value}>{tab.title}</Tabs.Tab>
+              ))}
+            </Tabs>
+          </div>
         </Section>
 
         <Section title="Tag">
