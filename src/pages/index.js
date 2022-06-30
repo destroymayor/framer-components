@@ -52,7 +52,7 @@ export default function Home() {
         <h1 className="text-3xl">Framer-Components</h1>
       </header>
 
-      <main className="flex w-full flex-1 flex-col gap-2 p-4 md:px-20">
+      <main className="mb-20 flex w-full flex-1 flex-col gap-2 p-4 md:px-20">
         <Section title="Button">
           <Button>Button</Button>
           <Button color="primary">Button</Button>
@@ -147,16 +147,16 @@ export default function Home() {
             <Button>Default</Button>
           </Tooltip>
 
-          <Tooltip color="primary" content="Primary">
-            <Button color="primary">Primary</Button>
+          <Tooltip color="primary" content="Primary" placement="bottom">
+            <Button color="primary">Primary Bottom</Button>
           </Tooltip>
 
-          <Tooltip color="success" content="Success">
-            <Button color="success">Success</Button>
+          <Tooltip color="success" content="Success" placement="left">
+            <Button color="success">Success left</Button>
           </Tooltip>
 
-          <Tooltip color="warning" content="Tooltip">
-            <Button color="warning">Warning</Button>
+          <Tooltip color="warning" content="Tooltip" placement="right">
+            <Button color="warning">Warning Right</Button>
           </Tooltip>
 
           <Tooltip color="error" content="Tooltip">

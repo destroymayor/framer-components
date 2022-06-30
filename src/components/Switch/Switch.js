@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
-import { colorTypes } from './constants';
+import { colorType } from './constants';
 
 export default function Switch(props) {
   const { checked = false, disabled, color = 'primary', onChange } = props;
@@ -36,7 +36,7 @@ export default function Switch(props) {
         />
         <div
           className={clsx(
-            isChecked ? `${colorTypes[color]} group-hover:bg-opacity-80` : 'bg-gray-300',
+            isChecked ? `${colorType[color]} group-hover:bg-opacity-80` : 'bg-gray-300',
             disabled ? 'opacity-50' : 'opacity-100',
             'block h-8 w-14 rounded-full'
           )}

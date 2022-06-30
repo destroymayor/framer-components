@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
 import { directionType } from './constants';
-
 import Tab from './Tab';
 
 export default function Tabs(props) {
@@ -28,11 +27,9 @@ export default function Tabs(props) {
   const resetHighlight = () => setHighlightedTab(null);
 
   const highlightAnimate = tabBoundingBox && {
-    transitionDuration: isHoveredFromNull ? 0 : '50ms',
-    opacity: highlightedTab ? 1 : 0,
-    width: tabBoundingBox?.width,
     height: tabBoundingBox?.height,
-    transform: directionType?.[direction].transform(tabBoundingBox, wrapperBoundingBox),
+    width: directionType?.[direction]?.width(tabBoundingBox),
+    transform: directionType?.[direction]?.transform(tabBoundingBox, wrapperBoundingBox),
   };
 
   return (
@@ -43,9 +40,12 @@ export default function Tabs(props) {
     >
       <motion.div
         ref={highlightRef}
+        transition={{ duration: isHoveredFromNull ? 0 : 0.2 }}
         animate={{
           ...highlightAnimate,
-          transitionTimingFunction: 'ease',
+          opacity: highlightedTab ? 1 : 0,
+          transitionDuration: isHoveredFromNull ? 0 : '50ms',
+          transitionProperty: 'width transform opacity',
         }}
         className="absolute rounded-md bg-zinc-300 py-4"
       />

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import clsx from 'clsx';
 import { CheckIcon } from '@/components/Icon';
 
-import { colorTypes } from './constants';
+import { colorType } from './constants';
 
 export default function Checkbox(props) {
   const { checked = undefined, disabled, color = 'primary', onChange } = props;
@@ -38,7 +38,7 @@ export default function Checkbox(props) {
         className={clsx(
           'relative flex items-center justify-center',
           'rounded border',
-          isChecked ? colorTypes[color] : ' border-gray-400',
+          isChecked ? colorType[color] : ' border-gray-400',
           disabled
             ? 'cursor-not-allowed border-gray-300/70 bg-gray-200'
             : 'hover:border-primary focus:border-primary cursor-pointer'
