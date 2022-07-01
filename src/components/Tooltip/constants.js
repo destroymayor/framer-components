@@ -1,9 +1,9 @@
 export const colorType = {
-  default: 'bg-zinc-500 text-zinc-50',
-  primary: 'bg-blue-500 text-zinc-50',
-  warning: 'bg-amber-600 text-zinc-50',
-  success: 'bg-green-600 text-zinc-50',
-  error: 'bg-red-500 text-zinc-50',
+  default: 'bg-default text-zinc-50',
+  primary: 'bg-primary text-zinc-50',
+  warning: 'bg-warning text-zinc-50',
+  success: 'bg-success text-zinc-50',
+  error: 'bg-error text-zinc-50',
 };
 
 export const getRect = (element) => {

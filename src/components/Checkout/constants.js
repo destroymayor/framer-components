@@ -1,6 +1,6 @@
 export const colorType = {
-  primary: 'bg-blue-500 border-transparent text-white',
-  success: 'bg-green-600 border-transparent text-white',
-  warning: 'bg-amber-600 border-transparent text-white',
-  error: 'bg-rose-600 border-transparent text-white',
+  primary: 'bg-primary border-transparent text-white',
+  success: 'bg-success border-transparent text-white',
+  warning: 'bg-warning border-transparent text-white',
+  error: 'bg-error border-transparent text-white',
 };

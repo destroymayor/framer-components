@@ -41,7 +41,7 @@ export default function Checkbox(props) {
           isChecked ? colorType[color] : ' border-gray-400',
           disabled
             ? 'cursor-not-allowed border-gray-300/70 bg-gray-200'
-            : 'hover:border-primary focus:border-primary cursor-pointer'
+            : 'cursor-pointer hover:border-primary focus:border-primary'
         )}
       >
         <motion.span

@@ -1,56 +1,123 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import useOnClickOutside from '@/hooks/use-on-click-outside.hook';
 
 import clsx from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronUpIcon, ChevronDownIcon } from '@/components/Icon';
+import Spinner from '@/components/Spinner';
+import { ChevronUpIcon, ChevronDownIcon, XIcon } from '@/components/Icon';
 
 import { colorType } from './constants';
 
 export default function Select(props) {
   const {
+    searchable = false,
+    clearable = true,
     disabled,
-    value,
-    options = [],
+    loading,
     className,
     color = 'primary',
+    defaultValue = '',
+    options = [],
     renderItem,
     onSelect,
   } = props;
-  const selectRef = useRef(null);
+
+  const selectContainerRef = useRef(null);
+  const searchInputRef = useRef(null);
 
   const [isOpen, setOpen] = useState(false);
+  const [selected, setSelected] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
-  useOnClickOutside(selectRef, () => setOpen(false));
+  useOnClickOutside(selectContainerRef, () => setOpen(false));
 
-  const handleToggle = () => setOpen((prevState) => !prevState);
+  useEffect(() => setSearchValue(defaultValue), []);
+
+  const handleToggle = () => {
+    if (disabled) return;
+
+    searchInputRef?.current?.focus();
+    setOpen((prevState) => !prevState);
+  };
+
+  const handleSearch = (e) => {
+    setSearchValue(e.target.value);
+  };
 
   const handleSelect = (option, index) => {
     onSelect?.(option, index);
+    setSelected(option);
+    setSearchValue('');
     setOpen(false);
   };
 
+  const handleClear = () => {
+    setSelected('');
+    setSearchValue('');
+  };
+
+  const filterOptions =
+    searchValue === ''
+      ? options
+      : options.filter((item) => item.match(new RegExp(searchValue, 'g')));
+
   return (
-    <div ref={selectRef} className="relative">
-      <button
-        disabled={disabled}
+    <div ref={selectContainerRef} className="relative min-w-[150px]">
+      <div
         className={clsx(
-          'group flex min-w-[150px] items-center justify-between rounded-lg bg-white p-2 text-gray-600 shadow ring ring-zinc-200 transition duration-200 ease-in-out focus:outline-none',
-          className,
-          disabled ? 'cursor-not-allowed bg-zinc-300 text-zinc-400 ring-zinc-300' : colorType[color]
+          'group relative flex items-center justify-between gap-2 rounded-lg bg-white p-2 text-gray-600 shadow ring ring-zinc-200 transition duration-200 ease-in-out focus:outline-none',
+          disabled
+            ? 'cursor-not-allowed bg-zinc-200/50 text-zinc-400 ring-zinc-300'
+            : colorType[color],
+          className
         )}
         onClick={handleToggle}
       >
-        <span>
-          {value ?? (
-            <span className={clsx(disabled ? 'text-zinc-400' : 'text-zinc-500')}>Select</span>
+        <div className="flex flex-1 items-center">
+          {searchValue === '' && (
+            <span className={clsx(searchable ? 'absolute left-3' : '')}>{selected}</span>
           )}
-        </span>
-        <span>
-          {isOpen ? <ChevronUpIcon className="h-5 w-5" /> : <ChevronDownIcon className="h-5 w-5" />}
-        </span>
-      </button>
+
+          {searchable && (
+            <input
+              ref={searchInputRef}
+              disabled={disabled}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="none"
+              className={clsx(
+                'w-full bg-transparent px-1 focus:outline-none',
+                disabled ? 'cursor-not-allowed' : ''
+              )}
+              value={searchValue}
+              onChange={handleSearch}
+            />
+          )}
+        </div>
+
+        <div className="flex items-center gap-1">
+          {loading && <Spinner className="h-5 w-5" />}
+
+          {!loading && clearable && !disabled && (searchValue !== '' || selected !== '') && (
+            <span
+              className="invisible h-5 w-5 cursor-pointer text-zinc-400 hover:text-zinc-700 group-hover:visible"
+              onClick={handleClear}
+            >
+              <XIcon />
+            </span>
+          )}
+
+          <span
+            className={clsx(
+              'h-5 w-5 text-zinc-400',
+              disabled ? 'cursor-not-allowed' : 'cursor-pointer group-hover:text-zinc-700'
+            )}
+          >
+            {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          </span>
+        </div>
+      </div>
 
       <AnimatePresence>
         {isOpen && (
@@ -61,7 +128,7 @@ export default function Select(props) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
           >
-            {options.map((option, index) => (
+            {filterOptions.map((option, index) => (
               <motion.li
                 key={`${index.toString()}`}
                 className={clsx(

@@ -33,7 +33,7 @@ const Section = (props) => {
   return (
     <div className="flex flex-col items-start gap-4 rounded-md bg-zinc-100 p-4">
       <h2 className="text-xl text-zinc-600">{title}</h2>
-      <div className="flex flex-wrap items-center gap-2">{children}</div>
+      <div className="flex w-full flex-wrap items-center gap-2">{children}</div>
     </div>
   );
 };
@@ -74,11 +74,15 @@ export default function Home() {
         </Section>
 
         <Section title="Select">
-          <Select options={['Option 1', 'Option 2']} />
-          <Select options={['Option 1 success', 'Option 2 success']} color="success" />
+          <Select options={['Option 1', 'Option 2']} searchable />
+          <Select options={['Option 1 success', 'Option 2 success']} color="success" searchable />
           <Select options={['Option 1 warning', 'Option 2 warning']} color="warning" />
           <Select options={['Option 1 error', 'Option 2 error']} color="error" />
-          <Select options={['Option 1 error', 'Option 2 error']} disabled />
+          <Select
+            options={['Option 1 error', 'Option 2 error']}
+            disabled
+            defaultValue={'Option 1 error'}
+          />
         </Section>
 
         <Section title="Switch">
