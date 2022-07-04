@@ -125,14 +125,18 @@ export default function Home() {
             <span>Default</span>
             <Tabs className="rounded-md border border-zinc-400">
               {tabsData.map((tab) => (
-                <Tabs.Tab key={tab.value}>{tab.title}</Tabs.Tab>
+                <Tabs.Tab key={tab.value} value={tab} className="p-2">
+                  {tab.title}
+                </Tabs.Tab>
               ))}
             </Tabs>
 
             <span>Vertical Tabs</span>
             <Tabs direction="vertical" className="rounded-md border border-zinc-400">
               {tabsData.map((tab) => (
-                <Tabs.Tab key={tab.value}>{tab.title}</Tabs.Tab>
+                <Tabs.Tab key={tab.value} value={tab} className="p-2">
+                  {tab.title}
+                </Tabs.Tab>
               ))}
             </Tabs>
           </div>

@@ -1,13 +1,18 @@
-import { forwardRef } from 'react';
+import { useContext } from 'react';
+import { TabsContext } from './Tabs';
 
 import clsx from 'clsx';
 
-export default forwardRef(function Tabs(props, ref) {
-  const { children, className } = props;
+export default function Tab(props) {
+  const { children, value, className } = props;
+  const { repositionHighlight } = useContext(TabsContext);
 
   return (
-    <button {...props} className={clsx('inline-block p-2', className)} ref={ref}>
+    <li
+      className={clsx('relative', className)}
+      onMouseEnter={(ev) => repositionHighlight(ev, value)}
+    >
       {children}
-    </button>
+    </li>
   );
-});
+}
